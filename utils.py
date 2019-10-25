@@ -86,7 +86,7 @@ def s_box_decrypt(y):
 
 
 def linear_approximation():
-    return [[sub_linear_approximation(i, j) for i in range(16)] for j in range(16)]
+    return [[sub_linear_approximation(i, j) for j in range(16)] for i in range(16)]
 
 
 def s_box_encrypt_temp(x):
