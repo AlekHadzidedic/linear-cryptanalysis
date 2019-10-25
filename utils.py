@@ -10,17 +10,28 @@ def generate_key():
     return key
 
 
+def key_xor(plaintext, key):
+    xor_sum = plaintext ^ key
+    bin_num = binary_splice(bin(xor_sum))
+    s_box_partition = []
+
+    for i in range(4):
+        s_box_partition.append(int('0b' + bin_num[4*i:4*(i + 1)], 2))
+
+    return s_box_partition
+
+
 def sub_linear_approximation(input_sum, output_sum):
     equation_satisfaction_count = 0
     for i in range(16):
         and_product_input = input_sum & i
         and_product_input = bin(and_product_input)
-        str_product_input = and_product_input[2:len(and_product_input)]
+        str_product_input = binary_splice(and_product_input)
 
-        output_mapping = s_box_encrypt_temp(i)
+        output_mapping = s_box_encrypt(i)
         and_product_output = output_sum & output_mapping
         and_product_output = bin(and_product_output)
-        str_product_output = and_product_output[2:len(and_product_output)]
+        str_product_output = binary_splice(and_product_output)
 
         input_xor_sum = calculate_xor_sum(str_product_input)
         output_xor_sum = calculate_xor_sum(str_product_output)
@@ -134,3 +145,11 @@ def s_box_decrypt_temp(y):
 
     return mapping[y]
 
+
+def binary_splice(bin_num):
+    bin_num = bin_num[2:len(bin_num)]
+
+    if len(bin_num) < 16:
+        bin_num = '0'*(16 - len(bin_num)) + bin_num
+
+    return bin_num
