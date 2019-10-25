@@ -21,7 +21,7 @@ def key_xor(plaintext, key):
     return s_box_partition
 
 
-def sub_linear_approximation(input_sum, output_sum):
+def construct_sub_linear_approximation(input_sum, output_sum):
     equation_satisfaction_count = 0
     for i in range(16):
         and_product_input = input_sum & i
@@ -96,8 +96,8 @@ def s_box_decrypt(y):
     return mapping[y]
 
 
-def linear_approximation():
-    return [[sub_linear_approximation(i, j) for j in range(16)] for i in range(16)]
+def construct_linear_approximation():
+    return [[construct_sub_linear_approximation(i, j) for j in range(16)] for i in range(16)]
 
 
 def s_box_encrypt_temp(x):
