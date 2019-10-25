@@ -14,11 +14,13 @@ def sub_linear_approximation(input_sum, output_sum):
     equation_satisfaction_count = 0
     for i in range(16):
         and_product_input = input_sum & i
-        str_product_input = str(and_product_input)[2:len(and_product_input)]
+        and_product_input = bin(and_product_input)
+        str_product_input = and_product_input[2:len(and_product_input)]
 
         output_mapping = s_box_encrypt(i)
         and_product_output = output_sum & output_mapping
-        str_product_output = str(and_product_output)[2:len(and_product_output)]
+        and_product_output = bin(and_product_output)
+        str_product_output = and_product_output[2:len(and_product_output)]
 
         input_xor_sum = calculate_xor_sum(str_product_input)
         output_xor_sum = calculate_xor_sum(str_product_output)
