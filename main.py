@@ -1,11 +1,6 @@
-import utils
+from encrypt import encrypt
 
-key_1 = bin(0b1100111110010101)
-key_2 = bin(0b0010101000111011)
-key_3 = bin(0b0011001111011101)
-key_4 = bin(0b1110000110100111)
-key_5 = bin(0b1000110010010100)
+plain_text = 34859
+round_keys = [3049, 3492, 1038, 357, 6789]
 
-x = utils.construct_linear_approximation()
-
-print(x)
+x = encrypt(plain_text, round_keys)
