@@ -17,7 +17,7 @@ def sub_linear_approximation(input_sum, output_sum):
         and_product_input = bin(and_product_input)
         str_product_input = and_product_input[2:len(and_product_input)]
 
-        output_mapping = s_box_encrypt(i)
+        output_mapping = s_box_encrypt_temp(i)
         and_product_output = output_sum & output_mapping
         and_product_output = bin(and_product_output)
         str_product_output = and_product_output[2:len(and_product_output)]
@@ -28,7 +28,7 @@ def sub_linear_approximation(input_sum, output_sum):
         if input_xor_sum == output_xor_sum:
             equation_satisfaction_count += 1
 
-    return equation_satisfaction_count
+    return equation_satisfaction_count - 8
 
 
 def calculate_xor_sum(binary_string):

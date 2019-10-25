@@ -6,9 +6,4 @@ key_3 = bin(0b0011001111011101)
 key_4 = bin(0b1110000110100111)
 key_5 = bin(0b1000110010010100)
 
-#print(utils.generate_key())
-
-string_bin = bin(10 & 1)
-
-for i in string_bin:
-    print(i)
+print(utils.linear_approximation())
