@@ -10,47 +10,117 @@ def generate_key():
     return key
 
 
-def s_box_encrypt(binary_input):
+def sub_linear_approximation(input_sum, output_sum):
+    equation_satisfaction_count = 0
+    for i in range(16):
+        and_product = input_sum & i
+        str_product = str(and_product)[2:len(and_product)]
+
+
+def calculate_xor_sum(binary_string):
+    xor_sum = 0
+    for bit in binary_string:
+        xor_sum = xor_sum ^ bit
+
+    return xor_sum
+
+
+def s_box_encrypt(x):
     mapping = [
-        bin(12),
-        bin(6),
-        bin(0),
-        bin(4),
-        bin(11),
-        bin(8),
-        bin(2),
-        bin(13),
-        bin(1),
-        bin(15),
-        bin(7),
-        bin(5),
-        bin(14),
-        bin(3),
-        bin(9),
-        bin(10)
+        12,
+        6,
+        0,
+        4,
+        11,
+        8,
+        2,
+        13,
+        1,
+        15,
+        7,
+        5,
+        14,
+        3,
+        9,
+        10
     ]
 
-    return mapping[int(binary_input, 2)]
+    return mapping[x]
 
 
-def s_box_decrypt(binary_input):
+def s_box_decrypt(y):
     mapping = [
-        bin(2),
-        bin(8),
-        bin(6),
-        bin(13),
-        bin(3),
-        bin(11),
-        bin(1),
-        bin(10),
-        bin(5),
-        bin(14),
-        bin(15),
-        bin(4),
-        bin(0),
-        bin(7),
-        bin(12),
-        bin(9)
+        2,
+        8,
+        6,
+        13,
+        3,
+        11,
+        1,
+        10,
+        5,
+        14,
+        15,
+        4,
+        0,
+        7,
+        12,
+        9
     ]
 
-    return mapping[int(binary_input, 2)]
+    return mapping[y]
+
+
+def linear_approximation():
+    return [[sub_linear_approximation(i, j) for i in range(16)] for j in range(16)]
+
+
+def sub_linear_approximation(input_sum, output_sum):
+    return bin(input_sum ^ output_sum)
+
+
+def s_box_encrypt_temp(x):
+    mapping = [
+        14,
+        4,
+        13,
+        1,
+        2,
+        15,
+        11,
+        8,
+        3,
+        10,
+        6,
+        12,
+        5,
+        9,
+        0,
+        7
+    ]
+
+    return mapping[x]
+
+
+def s_box_decrypt_temp(y):
+    mapping = [
+        14,
+        3,
+        4,
+        8,
+        1,
+        12,
+        10,
+        15,
+        7,
+        13,
+        9,
+        6,
+        11,
+        2,
+        0,
+        5
+    ]
+
+    return mapping[y]
+
