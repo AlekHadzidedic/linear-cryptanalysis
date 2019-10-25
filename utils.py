@@ -75,10 +75,6 @@ def linear_approximation():
     return [[sub_linear_approximation(i, j) for i in range(16)] for j in range(16)]
 
 
-def sub_linear_approximation(input_sum, output_sum):
-    return bin(input_sum ^ output_sum)
-
-
 def s_box_encrypt_temp(x):
     mapping = [
         14,
