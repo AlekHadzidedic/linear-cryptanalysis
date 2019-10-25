@@ -10,14 +10,14 @@ def generate_key():
     return key
 
 
-def sub_linear_approximation(input_sum, output_sum):
+def construct_sub_linear_approximation(input_sum, output_sum):
     equation_satisfaction_count = 0
     for i in range(16):
         and_product_input = input_sum & i
         and_product_input = bin(and_product_input)
         str_product_input = and_product_input[2:len(and_product_input)]
 
-        output_mapping = s_box_encrypt_temp(i)
+        output_mapping = s_box_encrypt(i)
         and_product_output = output_sum & output_mapping
         and_product_output = bin(and_product_output)
         str_product_output = and_product_output[2:len(and_product_output)]
@@ -85,8 +85,8 @@ def s_box_decrypt(y):
     return mapping[y]
 
 
-def linear_approximation():
-    return [[sub_linear_approximation(i, j) for j in range(16)] for i in range(16)]
+def construct_linear_approximation():
+    return [[construct_sub_linear_approximation(i, j) for j in range(16)] for i in range(16)]
 
 
 def s_box_encrypt_temp(x):
