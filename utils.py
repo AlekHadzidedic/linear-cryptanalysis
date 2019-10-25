@@ -12,7 +12,7 @@ def generate_key():
 
 def key_xor(plaintext, key):
     xor_sum = plaintext ^ key
-    bin_num = binary_splice(bin(xor_sum))
+    bin_num = binary_splice(bin(xor_sum), 16)
     s_box_partition = []
 
     for i in range(4):
@@ -26,12 +26,12 @@ def construct_sub_linear_approximation(input_sum, output_sum):
     for i in range(16):
         and_product_input = input_sum & i
         and_product_input = bin(and_product_input)
-        str_product_input = binary_splice(and_product_input)
+        str_product_input = binary_splice(and_product_input, 4)
 
         output_mapping = s_box_encrypt(i)
         and_product_output = output_sum & output_mapping
         and_product_output = bin(and_product_output)
-        str_product_output = binary_splice(and_product_output)
+        str_product_output = binary_splice(and_product_output, 4)
 
         input_xor_sum = calculate_xor_sum(str_product_input)
         output_xor_sum = calculate_xor_sum(str_product_output)
@@ -146,22 +146,18 @@ def s_box_decrypt_temp(y):
     return mapping[y]
 
 
-def binary_splice(bin_num):
-    bin_num = bin_num[2:len(bin_num)]
+def binary_splice(bin_num, padding):
+    return bin_num[2:].zfill(padding)
 
-    if len(bin_num) < 16:
-        bin_num = '0'*(16 - len(bin_num)) + bin_num
-
-    return bin_num
 
 def encrypt(plaintext, round_keys):
     # 1 XOR Plaintext with First round key
     # 2 Substitute each bye
+    return
+
+
+def substitute_16_bit():
     substituted_string = ""
     for i in range(4):
-        substituted_string += bin(s_box_encrypt(i)) + " "
-    # 3 Permutate resulting binary string
+        substituted_string += binary_splice(bin(s_box_encrypt(i)), 4)
     print(substituted_string)
-
-encrypt(1, 2)
-
