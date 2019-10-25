@@ -10,6 +10,21 @@ def generate_key():
     return key
 
 
+def sub_linear_approximation(input_sum, output_sum):
+    equation_satisfaction_count = 0
+    for i in range(16):
+        and_product = input_sum & i
+        str_product = str(and_product)[2:len(and_product)]
+
+
+def calculate_xor_sum(binary_string):
+    xor_sum = 0
+    for bit in binary_string:
+        xor_sum = xor_sum ^ bit
+
+    return xor_sum
+
+
 def s_box_encrypt(binary_input):
     mapping = [
         bin(12),
