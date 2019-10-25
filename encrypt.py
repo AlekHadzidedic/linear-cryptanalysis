@@ -1,3 +1,5 @@
+import random
+
 from linear_approximation import s_box_encrypt
 from utils import binary_splice
 
@@ -5,7 +7,6 @@ from utils import binary_splice
 def encrypt(plaintext, round_keys):
     num_rounds = 5
     temp_plaintext = plaintext
-    print(f'original - {binary_splice(bin(plaintext), 4)}')
     rounds_counter = 0
     for i in range(num_rounds - 2):
         # 1 XOR Plaintext with First round key
@@ -19,14 +20,13 @@ def encrypt(plaintext, round_keys):
 
         temp_plaintext = w
 
-        print(f'round {rounds_counter} - {u}')
-
         rounds_counter += 1
 
+    # Round 4 (no permutation)
     a = key_xor(temp_plaintext, round_keys[rounds_counter])
     b = substitute_16_bit(a)
-    print(f'round {rounds_counter} - {b}')
 
+    # Round 5 (xor with K5)
     rounds_counter += 1
     c = key_xor(int(f'0b{b}', 2), round_keys[rounds_counter])
 
@@ -34,7 +34,7 @@ def encrypt(plaintext, round_keys):
     for i in range(len(c)):
         c_string += binary_splice(bin(c[i]), 4)
 
-    print(f'round {rounds_counter} - {c_string}')
+    return c_string
 
 
 def substitute_16_bit(v):
@@ -66,3 +66,13 @@ def permutate(ciphertext):
         ciphertext_list[permutation_map[i]] = temp
 
     return int('0b' + ''.join(ciphertext_list), 2)
+
+
+def generate_plaintext_ciphertext_pairs(n, round_keys):
+    plaintext_sample = random.sample(range(1, 2 ** 16), n)
+    pairs = []
+
+    for plaintext in plaintext_sample:
+        pairs.append((binary_splice(bin(plaintext), 16), encrypt(plaintext, round_keys)))
+
+    return pairs

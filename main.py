@@ -1,6 +1,5 @@
-from encrypt import encrypt
+from encrypt import generate_plaintext_ciphertext_pairs
 
-plain_text = 34859
 round_keys = [3049, 3492, 1038, 357, 6789]
-
-x = encrypt(plain_text, round_keys)
+pairs = generate_plaintext_ciphertext_pairs(10000, round_keys)
+print(pairs)
