@@ -13,14 +13,26 @@ def generate_key():
 def sub_linear_approximation(input_sum, output_sum):
     equation_satisfaction_count = 0
     for i in range(16):
-        and_product = input_sum & i
-        str_product = str(and_product)[2:len(and_product)]
+        and_product_input = input_sum & i
+        str_product_input = str(and_product_input)[2:len(and_product_input)]
+
+        output_mapping = s_box_encrypt(i)
+        and_product_output = output_sum & output_mapping
+        str_product_output = str(and_product_output)[2:len(and_product_output)]
+
+        input_xor_sum = calculate_xor_sum(str_product_input)
+        output_xor_sum = calculate_xor_sum(str_product_output)
+
+        if input_xor_sum == output_xor_sum:
+            equation_satisfaction_count += 1
+
+    return equation_satisfaction_count
 
 
 def calculate_xor_sum(binary_string):
     xor_sum = 0
     for bit in binary_string:
-        xor_sum = xor_sum ^ bit
+        xor_sum = xor_sum ^ int(bit)
 
     return xor_sum
 
