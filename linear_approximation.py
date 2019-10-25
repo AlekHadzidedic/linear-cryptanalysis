@@ -64,6 +64,7 @@ def exhaust_subkeys(pairs):
             if xor_sum == 0:
                 counter += 1
 
-        table.append((key, counter))
+        bias = (counter - 5000)/10000
+        table.append((key, counter, bias))
 
     return table
