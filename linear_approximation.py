@@ -65,7 +65,7 @@ def exhaust_subkeys(pairs):
                 counter += 1
 
         bias = (counter - 5000)/10000
-        table.append((key, counter, bias))
+        table.append((binary_splice(bin(key), 8), counter, bias))
 
     table.sort(key=lambda tup: tup[2], reverse=True)
     return table

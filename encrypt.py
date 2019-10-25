@@ -68,7 +68,8 @@ def permutate(ciphertext):
     return int('0b' + ''.join(ciphertext_list), 2)
 
 
-def generate_plaintext_ciphertext_pairs(n, round_keys):
+def generate_plaintext_ciphertext_pairs(n, round_keys, seed):
+    random.seed(seed)
     plaintext_sample = random.sample(range(1, 2 ** 16), n)
     pairs = []
 
