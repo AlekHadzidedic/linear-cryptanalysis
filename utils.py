@@ -153,3 +153,15 @@ def binary_splice(bin_num):
         bin_num = '0'*(16 - len(bin_num)) + bin_num
 
     return bin_num
+
+def encrypt(plaintext, round_keys):
+    # 1 XOR Plaintext with First round key
+    # 2 Substitute each bye
+    substituted_string = ""
+    for i in range(4):
+        substituted_string += bin(s_box_encrypt(i)) + " "
+    # 3 Permutate resulting binary string
+    print(substituted_string)
+
+encrypt(1, 2)
+
