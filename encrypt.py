@@ -1,4 +1,5 @@
-from utils import binary_splice, s_box_encrypt
+from linear_approximation import s_box_encrypt
+from utils import binary_splice
 
 
 def encrypt(plaintext, round_keys):
