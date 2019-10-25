@@ -21,6 +21,18 @@ def key_xor(plaintext, key):
     return s_box_partition
 
 
+def permutate(ciphertext):
+    ciphertext_list = list(ciphertext)
+    permutation_map = {0: 0, 1: 4, 2: 8, 3: 12, 4: 1, 5: 5, 6: 9, 7: 13}
+
+    for i in range(len(ciphertext_list)):
+        temp = ciphertext_list[i]
+        ciphertext_list[i] = ciphertext_list[permutation_map[i]]
+        ciphertext_list[permutation_map[i]] = temp
+
+    return int('0b' + ''.join(ciphertext_list), 2)
+
+
 def construct_sub_linear_approximation(input_sum, output_sum):
     equation_satisfaction_count = 0
     for i in range(16):
